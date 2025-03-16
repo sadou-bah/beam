@@ -1,0 +1,50 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * License); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+plugins { id 'org.apache.beam.module' }
+applyJavaNature(
+    publish: false,
+    archivesBaseName: 'beam-sdks-java-io-elasticsearch-tests-common'
+)
+
+description = "Apache Beam :: SDKs :: Java :: IO :: Elasticsearch-Tests :: Common"
+ext.summary = "Common test classes for ElasticsearchIO"
+
+def elastic_search_version = "7.17.22"
+
+dependencies {
+  implementation library.java.jackson_core
+  implementation library.java.jackson_databind
+  implementation library.java.joda_time
+  implementation library.java.vendored_guava_32_1_2_jre
+  implementation library.java.http_core
+  implementation library.java.testcontainers_base
+  implementation "org.apache.httpcomponents:httpcore-nio:4.4.12"
+  implementation project(path: ":sdks:java:core", configuration: "shadow")
+  implementation project(":sdks:java:io:elasticsearch")
+  implementation library.java.slf4j_api
+  implementation library.java.hamcrest
+  implementation library.java.junit
+  implementation "org.elasticsearch.client:elasticsearch-rest-client:$elastic_search_version"
+  implementation library.java.testcontainers_elasticsearch
+
+  runtimeOnly library.java.log4j2_api
+  runtimeOnly library.java.log4j2_core
+  runtimeOnly library.java.slf4j_jdk14
+  runtimeOnly project(path: ":runners:direct-java", configuration: "shadow")
+}
