@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-version: "2"
+
 
 services:
   redis:
@@ -88,7 +88,7 @@ services:
       - cleanup_snippets
 
   go_runner:
-    image: apache/beam_playground-backend-go
+    image: apache/apache/beam_go_sdk
     environment:
       GOOGLE_CLOUD_PROJECT: test
       CACHE_TYPE: remote
@@ -112,7 +112,7 @@ services:
       - redis
 
   python_runner:
-    image: apache/beam_playground-backend-python
+    image: apache/beam_python3.10_sdk
     environment:
       GOOGLE_CLOUD_PROJECT: test
       CACHE_TYPE: remote
